@@ -3,7 +3,7 @@
 from flask import Flask
 from routes import bp_routes
 from models import db
-from cli import create_tables, drop_tables, seed_data
+from cli import create_tables, drop_tables, seed_data, update_data
 
 # Initialise app as Flask object
 app = Flask(__name__)
@@ -25,3 +25,4 @@ app.register_blueprint(bp_routes)
 app.cli.add_command(create_tables)
 app.cli.add_command(drop_tables)
 app.cli.add_command(seed_data)
+app.cli.add_command(update_data)

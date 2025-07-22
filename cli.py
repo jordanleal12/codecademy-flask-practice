@@ -63,5 +63,22 @@ def seed_data():
     )
     # Create data variables
     db.session.add_all([b1, r1, b2, r2, rev1, rev2])  # Add data variables
-    db.session.commit()
-    click.echo("database tables created")
+    try:
+        db.session.commit()
+        click.echo("database tables seeded")
+    except:
+        db.session.rollback()
+        click.echo("seeding failed, rollback")
+
+
+@click.command("update")
+@with_appcontext
+def update_data():
+    reader = Reader.query.get(765)
+    reader.email = "sam_adams_new@example.com"
+    try:
+        db.session.commit()
+        click.echo("data updated successfully")
+    except:
+        db.session.rollback()
+        click.echo("update failed, rollback")
